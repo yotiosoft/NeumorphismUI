@@ -2,20 +2,21 @@
 #include "NeumorphismUI.hpp"
 
 void Main() {
-	Scene::SetBackground(Color(224, 229, 236));
+	Scene::SetBackground(DEFAULT_BACKGROUND_COLOR);
 	
 	double d = 0.5;
 	int count = 0;
 	
 	Font font24(24);
-	NeumorphismUI::RectButton 	rectButton(Size(100, 100), U"Push", font24, false);
+	//NeumorphismUI::RectButtonObject 	rectButton(Size(100, 100), U"Push", font24, false);
 	NeumorphismUI::CircleButton	circleButton(50, U"Push", font24, false);
 	NeumorphismUI::Slider		slider(d, Vec2{400, 100}, 200, 30);
 	NeumorphismUI::Switch		switchButton(true, 400, 300, 50, 30);
-	NeumorphismUI::RectButton 	countButton(Size(200, 50), U"Count", font24, true);
-	
+	NeumorphismUI::RectButtonObject 	countButton(Size(200, 50), U"Count", font24, true);
+	bool pushed = true;
 	while (System::Update()) {
-		if (rectButton.draw(Point(100, 100))) {
+		NeumorphismUI::RectButton(Point(100, 100), Size(100, 100), U"Push", font24, pushed);
+		if (pushed) {
 			font24(U"ON").draw(250, 130, Palette::Black);
 		}
 		else {
