@@ -432,10 +432,10 @@ namespace NeumorphismUI {
 			.drawShadow(lowerShadowPosOffset, blurSize, shadowSize, lightShadow)
 			.draw(background);
 			
-			knobCircle = Circle(position.x+10/2+(size.x-10)*value, position.y+10/2+(size.y-10)/2, (size.y-10/2)/2);
+			knobCircle = Circle(position.x+10/2+knobX, position.y+10/2+(size.y-10)/2, (size.y-10/2)/2);
 			knobCircle.drawShadow(Vec2{0, 0}, blurSize, shadowSize, darkShadow);
 			
-			barRect = RoundRect(position.x+10/2, position.y+10/2, (size.x-10)*value, size.y-10, size.y/2);
+			barRect = RoundRect(position.x+10/2, position.y+10/2, knobX, size.y-10, size.y/2);
 			barRect.draw(Color(52, 152, 219));
 			
 			knobCircle.draw(background);
@@ -447,6 +447,13 @@ namespace NeumorphismUI {
 			if (knobCircle.leftPressed() || barRect.leftPressed() || innerSliderRect.leftPressed() || knobClicked) {
 				if (knobCircle.leftPressed()) {
 					knobClicked = true;
+				}
+				
+				if (barRect.leftPressed() || innerSliderRect.leftPressed()) {
+					beforeX = knobX;
+					clickedX = Cursor::Pos().x-position.x+10/2;
+					sliding = true;
+					slidingCount = 0.0;
 				}
 				
 				value = (Cursor::Pos().x-position.x-10/2)/(size.x-10);
@@ -462,6 +469,25 @@ namespace NeumorphismUI {
 				knobClicked = false;
 			}
 			
+			if (sliding) {
+				slidingCount += 0.2;
+				if (slidingCount > M_PI/2) {
+					slidingCount = 0;
+					sliding = false;
+				}
+				else {
+					if (beforeX > clickedX) {
+						knobX = beforeX - sin(slidingCount)*(beforeX-clickedX+(size.y-10)/2);
+					}
+					else {
+						knobX = beforeX + sin(slidingCount)*(clickedX-beforeX-(size.y-10)/2);
+					}
+				}
+			}
+			if (knobClicked) {
+				knobX = value*(size.x-10);
+			}
+			
 			return value;
 		}
 		
@@ -470,7 +496,9 @@ namespace NeumorphismUI {
 		RoundRect innerSliderRect;
 		RoundRect barRect;
 		Circle knobCircle;
+		
 		bool knobClicked;
+		bool sliding;
 		
 		double value;
 		
@@ -485,6 +513,11 @@ namespace NeumorphismUI {
 		Color background;
 		Color darkShadow;
 		Color lightShadow;
+		
+		int knobX;
+		int clickedX;
+		int beforeX;
+		double slidingCount;
 		
 		void init(double argRet, int argPositionX, int argPositionY, int argSizeW, int argSizeH) {
 			upperShadowPosOffset = {-4, -4};
@@ -507,6 +540,7 @@ namespace NeumorphismUI {
 			innerSliderRect = RoundRect(argPositionX+10/2, argPositionY+10/2, argSizeW-10, argSizeH-10, (argSizeH-10)/2);
 			
 			knobClicked = false;
+			knobX = (size.x-10)*value;
 		}
 	};
 }
