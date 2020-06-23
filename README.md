@@ -13,6 +13,7 @@ OpenSiv3Dでニューモーフィズム！
 ### ボタン
 #### 角丸長方形ボタン
 角丸長方形のボタンです。  
+  
 使用例：
 ```
 #include <Siv3D.hpp> // OpenSiv3D v0.4.3
@@ -34,16 +35,18 @@ void Main() {
 		else {
 			font24(U"OFF").draw(250, 130, Palette::Black);
 		}
-  }
+	}
 }
 ```
 押すとON、もう一度押すとOFFになります。  
+  
   
 押したら戻るボタンを設置したい場合は、
 ```
 NeumorphismUI::RectButton 	rectButton(Vec2(100, 100), U"Push", font24, true);
 ```
 としてください。  
+  
 使用例：
 ```
 #include <Siv3D.hpp> // OpenSiv3D v0.4.3
@@ -63,8 +66,8 @@ void Main() {
 			count ++;
 		}
 		font24(count).draw(350, 100, Palette::Black);
-    }
+	}
 }
 ```
 
-### 丸型ボタン
+#### 丸型ボタン
