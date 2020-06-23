@@ -505,6 +505,8 @@ namespace NeumorphismUI {
 			
 			sliderRect = RoundRect(argPositionX, argPositionY, argSizeW, argSizeH, argSizeH/2);
 			innerSliderRect = RoundRect(argPositionX+10/2, argPositionY+10/2, argSizeW-10, argSizeH-10, (argSizeH-10)/2);
+			
+			knobClicked = false;
 		}
 	};
 }
