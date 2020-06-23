@@ -16,39 +16,29 @@
 #define DEFAULT_LIGHT_COLOR			Color(255, 255, 255)
 
 namespace NeumorphismUI {
-	void RectButton(int argPositionX, int argPositionY,
+	void RectSwitch(int argPositionX, int argPositionY,
 					int argSizeX, int argSizeY,
 					String argStr, Font& argFont,
 					bool& argSwitch,
-					bool argRebound = false,
 					Color argBackgroundColor = DEFAULT_BACKGROUND_COLOR, Color argDarkColor = DEFAULT_SHADOW_COLOR, Color argLightColor = DEFAULT_LIGHT_COLOR,
 					Color argFontColor = Palette::Gray, Color argPushedFontColor = Palette::Gray,
 					int argRadius = 10, int argBlurSize = 16, int argShadowSize = 2,
 					Vec2 argUpperShadowPosOffset = {-4, -4}, Vec2 argLowerShadowPosOffset = {4, 4})
-		{
+	{
 		
 		Mat3x2 mat;
 		
 		RoundRect buttonRect = RoundRect(argPositionX, argPositionY, argSizeX, argSizeY, argRadius);
-		
-		if (argRebound) {
-			argSwitch = false;
-		}
 		
 		if (buttonRect.mouseOver()) {
 			Cursor::RequestStyle(CursorStyle::Hand);
 		}
 		bool isClicked = buttonRect.leftClicked();
 		if (isClicked) {
-			if (argRebound) {
-				argSwitch = true;
-			}
-			else {
-				argSwitch = !argSwitch;
-			}
+			argSwitch = !argSwitch;
 		}
 		
-		if ((!argRebound && argSwitch) || (argRebound && buttonRect.leftPressed())) {
+		if (argSwitch) {
 			buttonRect.drawShadow(argUpperShadowPosOffset, argBlurSize, argShadowSize, argDarkColor).drawShadow(argLowerShadowPosOffset, argBlurSize, argShadowSize, argLightColor).draw(argBackgroundColor);
 			mat = Mat3x2::Scale(0.9, Point(argPositionX+argSizeX/2, argPositionY+argSizeY/2));
 			
@@ -74,43 +64,120 @@ namespace NeumorphismUI {
 		}
 	}
 
-	void RectButton(Vec2 argPosition,
+	void RectSwitch(Vec2 argPosition,
 					int argSizeX, int argSizeY,
 					String argStr, Font& argFont,
 					bool& argSwitch,
-					bool argRebound = false,
 					Color argBackgroundColor = DEFAULT_BACKGROUND_COLOR, Color argDarkColor = DEFAULT_SHADOW_COLOR, Color argLightColor = DEFAULT_LIGHT_COLOR,
 					Color argFontColor = Palette::Gray, Color argPushedFontColor = Palette::Gray,
 					int argRadius = 10, int argBlurSize = 16, int argShadowSize = 2,
 					Vec2 argUpperShadowPosOffset = {-4, -4}, Vec2 argLowerShadowPosOffset = {4, 4})
 	{
-		RectButton(argPosition.x, argPosition.y, argSizeX, argSizeY, argStr, argFont, argSwitch, argRebound, argBackgroundColor, argDarkColor, argLightColor, argFontColor, argPushedFontColor, argRadius, argBlurSize, argShadowSize, argUpperShadowPosOffset, argLowerShadowPosOffset);
+		RectSwitch(argPosition.x, argPosition.y, argSizeX, argSizeY, argStr, argFont, argSwitch, argBackgroundColor, argDarkColor, argLightColor, argFontColor, argPushedFontColor, argRadius, argBlurSize, argShadowSize, argUpperShadowPosOffset, argLowerShadowPosOffset);
 	}
 
-	void RectButton(int argPositionX, int argPositionY,
+	void RectSwitch(int argPositionX, int argPositionY,
 					Vec2 argSize,
 					String argStr, Font& argFont,
 					bool& argSwitch,
-					bool argRebound = false,
 					Color argBackgroundColor = DEFAULT_BACKGROUND_COLOR, Color argDarkColor = DEFAULT_SHADOW_COLOR, Color argLightColor = DEFAULT_LIGHT_COLOR,
 					Color argFontColor = Palette::Gray, Color argPushedFontColor = Palette::Gray,
 					int argRadius = 10, int argBlurSize = 16, int argShadowSize = 2,
 					Vec2 argUpperShadowPosOffset = {-4, -4}, Vec2 argLowerShadowPosOffset = {4, 4})
 	{
-		RectButton(argPositionX, argPositionY, argSize.x, argSize.y, argStr, argFont, argSwitch, argRebound, argBackgroundColor, argDarkColor, argLightColor, argFontColor, argPushedFontColor, argRadius, argBlurSize, argShadowSize, argUpperShadowPosOffset, argLowerShadowPosOffset);
+		RectSwitch(argPositionX, argPositionY, argSize.x, argSize.y, argStr, argFont, argSwitch, argBackgroundColor, argDarkColor, argLightColor, argFontColor, argPushedFontColor, argRadius, argBlurSize, argShadowSize, argUpperShadowPosOffset, argLowerShadowPosOffset);
 	}
 
-	void RectButton(Vec2 argPosition,
+	void RectSwitch(Vec2 argPosition,
 					Vec2 argSize,
 					String argStr, Font& argFont,
 					bool& argSwitch,
-					bool argRebound = false,
 					Color argBackgroundColor = DEFAULT_BACKGROUND_COLOR, Color argDarkColor = DEFAULT_SHADOW_COLOR, Color argLightColor = DEFAULT_LIGHT_COLOR,
 					Color argFontColor = Palette::Gray, Color argPushedFontColor = Palette::Gray,
 					int argRadius = 10, int argBlurSize = 16, int argShadowSize = 2,
 					Vec2 argUpperShadowPosOffset = {-4, -4}, Vec2 argLowerShadowPosOffset = {4, 4})
 	{
-		RectButton(argPosition.x, argPosition.y, argSize.x, argSize.y, argStr, argFont, argSwitch, argRebound, argBackgroundColor, argDarkColor, argLightColor, argFontColor, argPushedFontColor, argRadius, argBlurSize, argShadowSize, argUpperShadowPosOffset, argLowerShadowPosOffset);
+		RectSwitch(argPosition.x, argPosition.y, argSize.x, argSize.y, argStr, argFont, argSwitch, argBackgroundColor, argDarkColor, argLightColor, argFontColor, argPushedFontColor, argRadius, argBlurSize, argShadowSize, argUpperShadowPosOffset, argLowerShadowPosOffset);
+	}
+
+
+	int RectButton(int argPositionX, int argPositionY,
+					int argSizeX, int argSizeY,
+					String argStr, Font& argFont,
+					Color argBackgroundColor = DEFAULT_BACKGROUND_COLOR, Color argDarkColor = DEFAULT_SHADOW_COLOR, Color argLightColor = DEFAULT_LIGHT_COLOR,
+					Color argFontColor = Palette::Gray, Color argPushedFontColor = Palette::Gray,
+					int argRadius = 10, int argBlurSize = 16, int argShadowSize = 2,
+					Vec2 argUpperShadowPosOffset = {-4, -4}, Vec2 argLowerShadowPosOffset = {4, 4})
+	{
+		
+		Mat3x2 mat;
+		
+		RoundRect buttonRect = RoundRect(argPositionX, argPositionY, argSizeX, argSizeY, argRadius);
+		
+		if (buttonRect.mouseOver()) {
+			Cursor::RequestStyle(CursorStyle::Hand);
+		}
+		bool clicked = buttonRect.leftClicked();
+		
+		if (buttonRect.leftPressed()) {
+			buttonRect.drawShadow(argUpperShadowPosOffset, argBlurSize, argShadowSize, argDarkColor).drawShadow(argLowerShadowPosOffset, argBlurSize, argShadowSize, argLightColor).draw(argBackgroundColor);
+			mat = Mat3x2::Scale(0.9, Point(argPositionX+argSizeX/2, argPositionY+argSizeY/2));
+			
+			if (!argFont.isEmpty()) {
+				{
+					// 座標変換行列を適用
+					const Transformer2D t(mat, false);
+					argFont(argStr).drawAt(argPositionX+argSizeX/2, argPositionY+argSizeY/2, argPushedFontColor);
+				}
+			}
+		}
+		else {
+			buttonRect.drawShadow(argLowerShadowPosOffset, argBlurSize, argShadowSize, argDarkColor).drawShadow(argUpperShadowPosOffset, argBlurSize, argShadowSize, argLightColor).draw(argBackgroundColor);
+			mat = Mat3x2::Identity();
+			
+			if (!argFont.isEmpty()) {
+				{
+					// 座標変換行列を適用
+					const Transformer2D t(mat, false);
+					argFont(argStr).drawAt(argPositionX+argSizeX/2, argPositionY+argSizeY/2, argFontColor);
+				}
+			}
+		}
+		
+		return clicked;
+	}
+
+	int RectButton(Vec2 argPosition,
+					int argSizeX, int argSizeY,
+					String argStr, Font& argFont,
+					Color argBackgroundColor = DEFAULT_BACKGROUND_COLOR, Color argDarkColor = DEFAULT_SHADOW_COLOR, Color argLightColor = DEFAULT_LIGHT_COLOR,
+					Color argFontColor = Palette::Gray, Color argPushedFontColor = Palette::Gray,
+					int argRadius = 10, int argBlurSize = 16, int argShadowSize = 2,
+					Vec2 argUpperShadowPosOffset = {-4, -4}, Vec2 argLowerShadowPosOffset = {4, 4})
+	{
+		return RectButton(argPosition.x, argPosition.y, argSizeX, argSizeY, argStr, argFont, argBackgroundColor, argDarkColor, argLightColor, argFontColor, argPushedFontColor, argRadius, argBlurSize, argShadowSize, argUpperShadowPosOffset, argLowerShadowPosOffset);
+	}
+
+	int RectButton(int argPositionX, int argPositionY,
+					Vec2 argSize,
+					String argStr, Font& argFont,
+					Color argBackgroundColor = DEFAULT_BACKGROUND_COLOR, Color argDarkColor = DEFAULT_SHADOW_COLOR, Color argLightColor = DEFAULT_LIGHT_COLOR,
+					Color argFontColor = Palette::Gray, Color argPushedFontColor = Palette::Gray,
+					int argRadius = 10, int argBlurSize = 16, int argShadowSize = 2,
+					Vec2 argUpperShadowPosOffset = {-4, -4}, Vec2 argLowerShadowPosOffset = {4, 4})
+	{
+		return RectButton(argPositionX, argPositionY, argSize.x, argSize.y, argStr, argFont, argBackgroundColor, argDarkColor, argLightColor, argFontColor, argPushedFontColor, argRadius, argBlurSize, argShadowSize, argUpperShadowPosOffset, argLowerShadowPosOffset);
+	}
+
+	int RectButton(Vec2 argPosition,
+					Vec2 argSize,
+					String argStr, Font& argFont,
+					Color argBackgroundColor = DEFAULT_BACKGROUND_COLOR, Color argDarkColor = DEFAULT_SHADOW_COLOR, Color argLightColor = DEFAULT_LIGHT_COLOR,
+					Color argFontColor = Palette::Gray, Color argPushedFontColor = Palette::Gray,
+					int argRadius = 10, int argBlurSize = 16, int argShadowSize = 2,
+					Vec2 argUpperShadowPosOffset = {-4, -4}, Vec2 argLowerShadowPosOffset = {4, 4})
+	{
+		return RectButton(argPosition.x, argPosition.y, argSize.x, argSize.y, argStr, argFont, argBackgroundColor, argDarkColor, argLightColor, argFontColor, argPushedFontColor, argRadius, argBlurSize, argShadowSize, argUpperShadowPosOffset, argLowerShadowPosOffset);
 	}
 
 	// 角丸長方形のボタン
