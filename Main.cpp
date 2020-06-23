@@ -8,7 +8,7 @@ void Main() {
 	int count = 0;
 	
 	Font font24(24);
-	NeumorphismUI::RectButton 	rectButton(Size(100, 100), U"Push", font24, false);
+	NeumorphismUI::RectButton 	rectButton(Vec2(100, 100), U"Push", font24, false);
 	NeumorphismUI::CircleButton	circleButton(50, U"Push", font24, false);
 	NeumorphismUI::Slider		slider(d, Vec2{400, 100}, 200, 30);
 	NeumorphismUI::Switch		switchButton(true, 400, 300, 50, 30);
@@ -43,6 +43,5 @@ void Main() {
 		if (countButton.leftClicked()) {
 			count ++;
 		}
-		font24(count).draw(350, 460, Palette::Black);
     }
 }

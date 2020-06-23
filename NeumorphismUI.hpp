@@ -15,11 +15,35 @@ namespace NeumorphismUI {
 	// 角丸長方形のボタン
 	class RectButton {
 	public:
+		RectButton(int argSizeX, int argSizeY) {
+			init(argSizeX, argSizeY, false);
+		}
+		
+		RectButton(Vec2 argSize) {
+			init(argSize.x, argSize.y, false);
+		}
+		
+		RectButton(int argSizeX, int argSizeY, bool argRebound) {
+			init(argSizeX, argSizeY, argRebound);
+		}
+		
+		RectButton(Vec2 argSize, bool argRebound) {
+			init(argSize.x, argSize.y, argRebound);
+		}
+		
+		RectButton(int argSizeX, int argSizeY, String argStr, Font& argFont) {
+			init(argSizeX, argSizeY, argStr, argFont, false);
+		}
+		
+		RectButton(Vec2 argSize, String argStr, Font& argFont) {
+			init(argSize.x, argSize.y, argStr, argFont, false);
+		}
+		
 		RectButton(int argSizeX, int argSizeY, String argStr, Font& argFont, bool argRebound) {
 			init(argSizeX, argSizeY, argStr, argFont, argRebound);
 		}
 		
-		RectButton(Size argSize, String argStr, Font& argFont, bool argRebound) {
+		RectButton(Vec2 argSize, String argStr, Font& argFont, bool argRebound) {
 			init(argSize.x, argSize.y, argStr, argFont, argRebound);
 		}
 		
@@ -51,10 +75,12 @@ namespace NeumorphismUI {
 				mat = Mat3x2::Identity();
 			}
 			
-			{
-				// 座標変換行列を適用
-				const Transformer2D t(mat, false);
-				font(str).drawAt(argPosition.x+buttonSize.x/2, argPosition.y+buttonSize.y/2, Palette::Gray);
+			if (!font.isEmpty()) {
+				{
+					// 座標変換行列を適用
+					const Transformer2D t(mat, false);
+					font(str).drawAt(argPosition.x+buttonSize.x/2, argPosition.y+buttonSize.y/2, Palette::Gray);
+				}
 			}
 			
 			return pressed;
@@ -90,6 +116,27 @@ namespace NeumorphismUI {
 		
 		Mat3x2 mat;
 		
+		void init(int argSizeX, int argSizeY, bool argRebound) {
+			buttonSize.x = argSizeX;
+			buttonSize.y = argSizeY;
+			
+			radius = 10;
+			
+			rebound = argRebound;
+			
+			upperShadowPosOffset = {-4, -4};
+			lowerShadowPosOffset = {4, 4};
+			blurSize = 16;
+			shadowSize = 2;
+			
+			background = Color(224, 229, 236);
+			darkShadow = Color(163, 177, 198);
+			lightShadow = Color(255, 255, 255);
+			
+			pressed = false;
+			beforeLeftClicked = false;
+		}
+		
 		void init(int argSizeX, int argSizeY, String argStr, Font& argFont, bool argRebound) {
 			buttonSize.x = argSizeX;
 			buttonSize.y = argSizeY;
@@ -118,6 +165,18 @@ namespace NeumorphismUI {
 	// 円形のボタン
 	class CircleButton {
 	public:
+		CircleButton(int argSize) {
+			init(argSize, false);
+		}
+		
+		CircleButton(int argSize, bool argRebound) {
+			init(argSize, argRebound);
+		}
+		
+		CircleButton(int argSize, String argStr, Font& argFont) {
+			init(argSize, argStr, argFont, false);
+		}
+		
 		CircleButton(int argSize, String argStr, Font& argFont, bool argRebound) {
 			init(argSize, argStr, argFont, argRebound);
 		}
@@ -189,6 +248,24 @@ namespace NeumorphismUI {
 		
 		Mat3x2 mat;
 		
+		void init(int argSize, bool argRebound) {
+			buttonSize = argSize;
+			
+			rebound = argRebound;
+			
+			upperShadowPosOffset = {-4, -4};
+			lowerShadowPosOffset = {4, 4};
+			blurSize = 16;
+			shadowSize = 2;
+			
+			background = Color(224, 229, 236);
+			darkShadow = Color(163, 177, 198);
+			lightShadow = Color(255, 255, 255);
+			
+			pressed = false;
+			beforeLeftClicked = false;
+		}
+		
 		void init(int argSize, String argStr, Font& argFont, bool argRebound) {
 			buttonSize = argSize;
 			str = argStr;
@@ -222,15 +299,7 @@ namespace NeumorphismUI {
 			init(argBool, argPositionX, argPositionY, argSize.x, argSize.y);
 		}
 		
-		Switch(bool argBool, int argPositionX, int argPositionY, Size argSize) {
-			init(argBool, argPositionX, argPositionY, argSize.x, argSize.y);
-		}
-		
 		Switch(bool argBool, Vec2 argPosition, int argSizeW, int argSizeH) {
-			init(argBool, argPosition.x, argPosition.y, argSizeW, argSizeH);
-		}
-		
-		Switch(bool argBool, Point argPosition, int argSizeW, int argSizeH) {
 			init(argBool, argPosition.x, argPosition.y, argSizeW, argSizeH);
 		}
 		
@@ -336,24 +405,20 @@ namespace NeumorphismUI {
 	// スライダー
 	class Slider {
 	public:
+		Slider(double argRet, int argPositionX, int argPositionY, int argSizeW, int argSizeH) {
+			init(argRet, argPositionX, argPositionY, argSizeW, argSizeH);
+		}
+		
+		Slider(double argRet, int argPositionX, int argPositionY, Vec2 argSize) {
+			init(argRet, argPositionX, argPositionY, argSize.x, argSize.y);
+		}
+		
 		Slider(double argRet, Vec2 argPosition, int argSizeW, int argSizeH) {
-			upperShadowPosOffset = {-4, -4};
-			lowerShadowPosOffset = {4, 4};
-			blurSize = 16;
-			shadowSize = 2;
-			
-			value = argRet;
-			
-			position = argPosition;
-			size.x = argSizeW;
-			size.y = argSizeH;
-			
-			background = Color(224, 229, 236);
-			darkShadow = Color(163, 177, 198);
-			lightShadow = Color(255, 255, 255);
-			
-			sliderRect = RoundRect(argPosition, argSizeW, argSizeH, argSizeH/2);
-			innerSliderRect = RoundRect(argPosition.x+10/2, argPosition.y+10/2, argSizeW-10, argSizeH-10, (argSizeH-10)/2);
+			init(argRet, argPosition.x, argPosition.y, argSizeW, argSizeH);
+		}
+		
+		Slider(double argRet, Vec2 argPosition, Vec2 argSize) {
+			init(argRet, argPosition.x, argPosition.y, argSize.x, argSize.y);
 		}
 		
 		double draw() {
@@ -420,6 +485,27 @@ namespace NeumorphismUI {
 		Color background;
 		Color darkShadow;
 		Color lightShadow;
+		
+		void init(double argRet, int argPositionX, int argPositionY, int argSizeW, int argSizeH) {
+			upperShadowPosOffset = {-4, -4};
+			lowerShadowPosOffset = {4, 4};
+			blurSize = 16;
+			shadowSize = 2;
+			
+			value = argRet;
+			
+			position.x = argPositionX;
+			position.y = argPositionY;
+			size.x = argSizeW;
+			size.y = argSizeH;
+			
+			background = Color(224, 229, 236);
+			darkShadow = Color(163, 177, 198);
+			lightShadow = Color(255, 255, 255);
+			
+			sliderRect = RoundRect(argPositionX, argPositionY, argSizeW, argSizeH, argSizeH/2);
+			innerSliderRect = RoundRect(argPositionX+10/2, argPositionY+10/2, argSizeW-10, argSizeH-10, (argSizeH-10)/2);
+		}
 	};
 }
 
