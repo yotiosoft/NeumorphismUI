@@ -93,7 +93,7 @@ void Main() {
 		else {
 			font24(U"OFF").draw(250, 130, Palette::Black);
 		}
-    }
+	}
 }
 ```
 ここで、座標は角丸長方形ボタンとは違い、**円の中心座標を指定する**ということに注意してください。  
@@ -101,7 +101,6 @@ void Main() {
 押したら戻るボタンを設置したい場合は、第4引数をtrueにしてください。
 ```
 NeumorphismUI::CircleButton circleButton(50, U"Push", font24, true);
-```
 ```
 この場合、メンバ関数leftClicked()で押されたかどうかが判定できます。  
 leftClicked()は、押しっぱなしにした場合も、ボタンがクリックされた瞬間だけtrueを返します。  
