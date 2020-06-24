@@ -9,21 +9,23 @@ void Main() {
 	
 	Font font24(24);
 	//NeumorphismUI::RectButtonObject 	rectButton(Size(100, 100), U"Push", font24, false);
-	NeumorphismUI::CircleButton	circleButton(50, U"Push", font24, false);
+	//NeumorphismUI::CircleButtonObject	circleButton(50, U"Push", font24, false);
 	NeumorphismUI::Slider		slider(d, Vec2{400, 100}, 200, 30);
 	NeumorphismUI::Switch		switchButton(true, 400, 300, 50, 30);
 	//NeumorphismUI::RectButtonObject 	countButton(Size(200, 50), U"Count", font24, true);
-	bool pushed = true;
+	bool rectButtonPushed = true;
+	bool circleButtonPushed = false;
 	while (System::Update()) {
-		NeumorphismUI::RectSwitch(Point(100, 100), Size(100, 100), U"Push", font24, pushed);
-		if (pushed) {
+		NeumorphismUI::RectSwitch(Point(100, 100), Size(100, 100), U"Push", font24, rectButtonPushed);
+		if (rectButtonPushed) {
 			font24(U"ON").draw(250, 130, Palette::Black);
 		}
 		else {
 			font24(U"OFF").draw(250, 130, Palette::Black);
 		}
 		
-		if (circleButton.draw(Point(150, 320))) {
+		NeumorphismUI::CircleSwitch(Point(150, 320), 50, U"Push", font24, circleButtonPushed);
+		if (circleButtonPushed) {
 			font24(U"ON").draw(250, 300, Palette::Black);
 		}
 		else {

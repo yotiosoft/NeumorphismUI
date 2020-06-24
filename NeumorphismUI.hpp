@@ -28,18 +28,18 @@ namespace NeumorphismUI {
 		
 		Mat3x2 mat;
 		
-		RoundRect buttonRect = RoundRect(argPositionX, argPositionY, argSizeX, argSizeY, argRadius);
+		RoundRect switchRect(argPositionX, argPositionY, argSizeX, argSizeY, argRadius);
 		
-		if (buttonRect.mouseOver()) {
+		if (switchRect.mouseOver()) {
 			Cursor::RequestStyle(CursorStyle::Hand);
 		}
-		bool isClicked = buttonRect.leftClicked();
+		bool isClicked = switchRect.leftClicked();
 		if (isClicked) {
 			argSwitch = !argSwitch;
 		}
 		
 		if (argSwitch) {
-			buttonRect.drawShadow(argUpperShadowPosOffset, argBlurSize, argShadowSize, argDarkColor).drawShadow(argLowerShadowPosOffset, argBlurSize, argShadowSize, argLightColor).draw(argBackgroundColor);
+			switchRect.drawShadow(argUpperShadowPosOffset, argBlurSize, argShadowSize, argDarkColor).drawShadow(argLowerShadowPosOffset, argBlurSize, argShadowSize, argLightColor).draw(argBackgroundColor);
 			mat = Mat3x2::Scale(0.9, Point(argPositionX+argSizeX/2, argPositionY+argSizeY/2));
 			
 			if (!argFont.isEmpty()) {
@@ -51,7 +51,7 @@ namespace NeumorphismUI {
 			}
 		}
 		else {
-			buttonRect.drawShadow(argLowerShadowPosOffset, argBlurSize, argShadowSize, argDarkColor).drawShadow(argUpperShadowPosOffset, argBlurSize, argShadowSize, argLightColor).draw(argBackgroundColor);
+			switchRect.drawShadow(argLowerShadowPosOffset, argBlurSize, argShadowSize, argDarkColor).drawShadow(argUpperShadowPosOffset, argBlurSize, argShadowSize, argLightColor).draw(argBackgroundColor);
 			mat = Mat3x2::Identity();
 			
 			if (!argFont.isEmpty()) {
@@ -112,7 +112,7 @@ namespace NeumorphismUI {
 		
 		Mat3x2 mat;
 		
-		RoundRect buttonRect = RoundRect(argPositionX, argPositionY, argSizeX, argSizeY, argRadius);
+		RoundRect buttonRect(argPositionX, argPositionY, argSizeX, argSizeY, argRadius);
 		
 		if (buttonRect.mouseOver()) {
 			Cursor::RequestStyle(CursorStyle::Hand);
@@ -180,281 +180,122 @@ namespace NeumorphismUI {
 		return RectButton(argPosition.x, argPosition.y, argSize.x, argSize.y, argStr, argFont, argBackgroundColor, argDarkColor, argLightColor, argFontColor, argPushedFontColor, argRadius, argBlurSize, argShadowSize, argUpperShadowPosOffset, argLowerShadowPosOffset);
 	}
 
-	// 角丸長方形のボタン
-	class RectButtonObject {
-	public:
-		RectButtonObject(int argSizeX, int argSizeY) {
-			init(argSizeX, argSizeY, false);
+	void CircleSwitch(int argPositionX, int argPositionY,
+					  int argSize,
+					  String argStr, Font& argFont,
+					  bool& argSwitch,
+					  Color argBackgroundColor = DEFAULT_BACKGROUND_COLOR, Color argDarkColor = DEFAULT_SHADOW_COLOR, Color argLightColor = DEFAULT_LIGHT_COLOR,
+					  Color argFontColor = Palette::Gray, Color argPushedFontColor = Palette::Gray,
+					  int argBlurSize = 16, int argShadowSize = 2,
+					  Vec2 argUpperShadowPosOffset = {-4, -4}, Vec2 argLowerShadowPosOffset = {4, 4})
+	{
+		
+		Mat3x2 mat;
+		
+		Circle switchCircle(argPositionX, argPositionY, argSize);
+		
+		if (switchCircle.mouseOver()) {
+			Cursor::RequestStyle(CursorStyle::Hand);
+		}
+		bool isClicked = switchCircle.leftClicked();
+		if (isClicked) {
+			argSwitch = !argSwitch;
 		}
 		
-		RectButtonObject(Vec2 argSize) {
-			init(argSize.x, argSize.y, false);
-		}
-		
-		RectButtonObject(int argSizeX, int argSizeY, bool argRebound) {
-			init(argSizeX, argSizeY, argRebound);
-		}
-		
-		RectButtonObject(Vec2 argSize, bool argRebound) {
-			init(argSize.x, argSize.y, argRebound);
-		}
-		
-		RectButtonObject(int argSizeX, int argSizeY, String argStr, Font& argFont) {
-			init(argSizeX, argSizeY, argStr, argFont, false);
-		}
-		
-		RectButtonObject(Vec2 argSize, String argStr, Font& argFont) {
-			init(argSize.x, argSize.y, argStr, argFont, false);
-		}
-		
-		RectButtonObject(int argSizeX, int argSizeY, String argStr, Font& argFont, bool argRebound) {
-			init(argSizeX, argSizeY, argStr, argFont, argRebound);
-		}
-		
-		RectButtonObject(Vec2 argSize, String argStr, Font& argFont, bool argRebound) {
-			init(argSize.x, argSize.y, argStr, argFont, argRebound);
-		}
-		
-		bool draw(Point argPosition) {
-			if (buttonRect.mouseOver()) {
-				Cursor::RequestStyle(CursorStyle::Hand);
-			}
+		if (argSwitch) {
+			switchCircle.drawShadow(argUpperShadowPosOffset, argBlurSize, argShadowSize, argDarkColor).drawShadow(argLowerShadowPosOffset, argBlurSize, argShadowSize, argLightColor).draw(argBackgroundColor);
+			mat = Mat3x2::Scale(0.9, Point(argPositionX, argPositionY));
 			
-			if (rebound) {
-				if (buttonRect.leftPressed()) {
-					pressed = true;
-				}
-				if (pressed && buttonRect.leftReleased()) {
-					pressed = false;
-				}
-			}
-			else if (buttonRect.leftPressed() && !beforeLeftClicked) {
-				pressed = !pressed;
-			}
-			beforeLeftClicked = buttonRect.leftPressed();
-			
-			buttonRect = RoundRect(argPosition, buttonSize.x, buttonSize.y, radius);
-			if (pressed) {
-				buttonRect.drawShadow(upperShadowPosOffset, blurSize, shadowSize, darkShadow).drawShadow(lowerShadowPosOffset, blurSize, shadowSize, lightShadow).draw(background);
-				mat = Mat3x2::Scale(0.9, Point(argPosition.x+buttonSize.x/2, argPosition.y+buttonSize.y/2));
-			}
-			else {
-				buttonRect.drawShadow(lowerShadowPosOffset, blurSize, shadowSize, darkShadow).drawShadow(upperShadowPosOffset, blurSize, shadowSize, lightShadow).draw(background);
-				mat = Mat3x2::Identity();
-			}
-			
-			if (!font.isEmpty()) {
+			if (!argFont.isEmpty()) {
 				{
 					// 座標変換行列を適用
 					const Transformer2D t(mat, false);
-					font(str).drawAt(argPosition.x+buttonSize.x/2, argPosition.y+buttonSize.y/2, Palette::Gray);
+					argFont(argStr).drawAt(argPositionX, argPositionY, argPushedFontColor);
 				}
 			}
+		}
+		else {
+			switchCircle.drawShadow(argLowerShadowPosOffset, argBlurSize, argShadowSize, argDarkColor).drawShadow(argUpperShadowPosOffset, argBlurSize, argShadowSize, argLightColor).draw(argBackgroundColor);
+			mat = Mat3x2::Identity();
 			
-			return pressed;
+			if (!argFont.isEmpty()) {
+				{
+					// 座標変換行列を適用
+					const Transformer2D t(mat, false);
+					argFont(argStr).drawAt(argPositionX, argPositionY, argFontColor);
+				}
+			}
 		}
-		
-		bool leftClicked() {
-			return buttonRect.leftClicked();
-		}
-		
-	private:
-		RoundRect buttonRect;
-		
-		Size buttonSize;
-		String str;
-		
-		Font font;
-		
-		int radius;
-		
-		bool rebound;
-		
-		Vec2 upperShadowPosOffset;
-		Vec2 lowerShadowPosOffset;
-		int blurSize;
-		int shadowSize;
-		
-		Color background;
-		Color darkShadow;
-		Color lightShadow;
-		
-		bool pressed;
-		bool beforeLeftClicked;
+	}
+
+	void CircleSwitch(Vec2 argPosition,
+					  int argSize,
+					  String argStr, Font& argFont,
+					  bool& argSwitch,
+					  Color argBackgroundColor = DEFAULT_BACKGROUND_COLOR, Color argDarkColor = DEFAULT_SHADOW_COLOR, Color argLightColor = DEFAULT_LIGHT_COLOR,
+					  Color argFontColor = Palette::Gray, Color argPushedFontColor = Palette::Gray,
+					  int argBlurSize = 16, int argShadowSize = 2,
+					  Vec2 argUpperShadowPosOffset = {-4, -4}, Vec2 argLowerShadowPosOffset = {4, 4})
+	{
+		CircleSwitch(argPosition.x, argPosition.y, argSize, argStr, argFont, argSwitch, argBackgroundColor, argDarkColor, argLightColor, argFontColor, argPushedFontColor, argBlurSize, argShadowSize, argUpperShadowPosOffset, argLowerShadowPosOffset);
+	}
+
+	int CircleButton(int argPositionX, int argPositionY,
+					 int argSize,
+					 String argStr, Font& argFont,
+					 Color argBackgroundColor = DEFAULT_BACKGROUND_COLOR, Color argDarkColor = DEFAULT_SHADOW_COLOR, Color argLightColor = DEFAULT_LIGHT_COLOR,
+					 Color argFontColor = Palette::Gray, Color argPushedFontColor = Palette::Gray,
+					 int argBlurSize = 16, int argShadowSize = 2,
+					 Vec2 argUpperShadowPosOffset = {-4, -4}, Vec2 argLowerShadowPosOffset = {4, 4})
+	{
 		
 		Mat3x2 mat;
 		
-		void init(int argSizeX, int argSizeY, bool argRebound) {
-			buttonSize.x = argSizeX;
-			buttonSize.y = argSizeY;
-			
-			radius = 10;
-			
-			rebound = argRebound;
-			
-			upperShadowPosOffset = {-4, -4};
-			lowerShadowPosOffset = {4, 4};
-			blurSize = 16;
-			shadowSize = 2;
-			
-			background = Color(224, 229, 236);
-			darkShadow = Color(163, 177, 198);
-			lightShadow = Color(255, 255, 255);
-			
-			pressed = false;
-			beforeLeftClicked = false;
-		}
+		Circle buttonCircle(argPositionX, argPositionY, argSize);
 		
-		void init(int argSizeX, int argSizeY, String argStr, Font& argFont, bool argRebound) {
-			buttonSize.x = argSizeX;
-			buttonSize.y = argSizeY;
-			str = argStr;
-			
-			radius = 10;
-			
-			rebound = argRebound;
-			
-			font = argFont;
-			
-			upperShadowPosOffset = {-4, -4};
-			lowerShadowPosOffset = {4, 4};
-			blurSize = 16;
-			shadowSize = 2;
-			
-			background = Color(224, 229, 236);
-			darkShadow = Color(163, 177, 198);
-			lightShadow = Color(255, 255, 255);
-			
-			pressed = false;
-			beforeLeftClicked = false;
+		if (buttonCircle.mouseOver()) {
+			Cursor::RequestStyle(CursorStyle::Hand);
 		}
-	};
-	
-	// 円形のボタン
-	class CircleButton {
-	public:
-		CircleButton(int argSize) {
-			init(argSize, false);
-		}
+		bool clicked = buttonCircle.leftClicked();
 		
-		CircleButton(int argSize, bool argRebound) {
-			init(argSize, argRebound);
-		}
-		
-		CircleButton(int argSize, String argStr, Font& argFont) {
-			init(argSize, argStr, argFont, false);
-		}
-		
-		CircleButton(int argSize, String argStr, Font& argFont, bool argRebound) {
-			init(argSize, argStr, argFont, argRebound);
-		}
-		
-		bool draw(Point argPosition) {
-			if (buttonCircle.mouseOver()) {
-				Cursor::RequestStyle(CursorStyle::Hand);
-			}
+		if (buttonCircle.leftPressed()) {
+			buttonCircle.drawShadow(argUpperShadowPosOffset, argBlurSize, argShadowSize, argDarkColor).drawShadow(argLowerShadowPosOffset, argBlurSize, argShadowSize, argLightColor).draw(argBackgroundColor);
+			mat = Mat3x2::Scale(0.9, Point(argPositionX, argPositionY));
 			
-			if (rebound) {
-				if (buttonCircle.leftPressed()) {
-					pressed = true;
-				}
-				if (pressed && buttonCircle.leftReleased()) {
-					pressed = false;
+			if (!argFont.isEmpty()) {
+				{
+					// 座標変換行列を適用
+					const Transformer2D t(mat, false);
+					argFont(argStr).drawAt(argPositionX, argPositionY, argPushedFontColor);
 				}
 			}
-			else if (buttonCircle.leftPressed() && !beforeLeftClicked) {
-				pressed = !pressed;
-			}
-			beforeLeftClicked = buttonCircle.leftPressed();
+		}
+		else {
+			buttonCircle.drawShadow(argLowerShadowPosOffset, argBlurSize, argShadowSize, argDarkColor).drawShadow(argUpperShadowPosOffset, argBlurSize, argShadowSize, argLightColor).draw(argBackgroundColor);
+			mat = Mat3x2::Identity();
 			
-			buttonCircle = Circle(argPosition, buttonSize);
-			
-			if (pressed) {
-				buttonCircle.drawShadow(upperShadowPosOffset, blurSize, shadowSize, Color(163, 177, 198)).drawShadow(lowerShadowPosOffset, blurSize, shadowSize, Palette::White).draw(background);
-				mat = Mat3x2::Scale(0.9, argPosition);
+			if (!argFont.isEmpty()) {
+				{
+					// 座標変換行列を適用
+					const Transformer2D t(mat, false);
+					argFont(argStr).drawAt(argPositionX, argPositionY, argFontColor);
+				}
 			}
-			else {
-				buttonCircle.drawShadow(lowerShadowPosOffset, blurSize, shadowSize, Color(163, 177, 198)).drawShadow(upperShadowPosOffset, blurSize, shadowSize, Palette::White).draw(background);
-				mat = Mat3x2::Identity();
-			}
-			
-			{
-				// 座標変換行列を適用
-				const Transformer2D t(mat, false);
-				font(str).drawAt(argPosition, Palette::Gray);
-			}
-			
-			return pressed;
 		}
 		
-		bool leftClicked() {
-			return buttonCircle.leftClicked();
-		}
-		
-	private:
-		Circle buttonCircle;
-		
-		int buttonSize;
-		String str;
-		
-		Font font;
-		Font smallFont;
-		
-		bool rebound;
-		
-		Vec2 upperShadowPosOffset;
-		Vec2 lowerShadowPosOffset;
-		int blurSize;
-		int shadowSize;
-		
-		Color background;
-		Color darkShadow;
-		Color lightShadow;
-		
-		bool pressed;
-		bool beforeLeftClicked;
-		
-		Mat3x2 mat;
-		
-		void init(int argSize, bool argRebound) {
-			buttonSize = argSize;
-			
-			rebound = argRebound;
-			
-			upperShadowPosOffset = {-4, -4};
-			lowerShadowPosOffset = {4, 4};
-			blurSize = 16;
-			shadowSize = 2;
-			
-			background = Color(224, 229, 236);
-			darkShadow = Color(163, 177, 198);
-			lightShadow = Color(255, 255, 255);
-			
-			pressed = false;
-			beforeLeftClicked = false;
-		}
-		
-		void init(int argSize, String argStr, Font& argFont, bool argRebound) {
-			buttonSize = argSize;
-			str = argStr;
-			
-			font = argFont;
-			
-			rebound = argRebound;
-			
-			upperShadowPosOffset = {-4, -4};
-			lowerShadowPosOffset = {4, 4};
-			blurSize = 16;
-			shadowSize = 2;
-			
-			background = Color(224, 229, 236);
-			darkShadow = Color(163, 177, 198);
-			lightShadow = Color(255, 255, 255);
-			
-			pressed = false;
-			beforeLeftClicked = false;
-		}
-	};
+		return clicked;
+	}
+
+	int CircleButton(Vec2 argPosition,
+					 int argSize,
+					 String argStr, Font& argFont,
+					 Color argBackgroundColor = DEFAULT_BACKGROUND_COLOR, Color argDarkColor = DEFAULT_SHADOW_COLOR, Color argLightColor = DEFAULT_LIGHT_COLOR,
+					 Color argFontColor = Palette::Gray, Color argPushedFontColor = Palette::Gray,
+					 int argBlurSize = 16, int argShadowSize = 2,
+					 Vec2 argUpperShadowPosOffset = {-4, -4}, Vec2 argLowerShadowPosOffset = {4, 4})
+	{
+		return CircleButton(argPosition.x, argPosition.y, argSize, argStr, argFont, argBackgroundColor, argDarkColor, argLightColor, argFontColor, argPushedFontColor, argBlurSize, argShadowSize, argUpperShadowPosOffset, argLowerShadowPosOffset);
+	}
 
 	// スライドスイッチ
 	class Switch {
