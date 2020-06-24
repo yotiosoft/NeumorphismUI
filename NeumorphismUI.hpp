@@ -549,6 +549,7 @@ namespace NeumorphismUI {
 			innerSliderRect = RoundRect(argPositionX+10/2, argPositionY+10/2, argSizeW-10, argSizeH-10, (argSizeH-10)/2);
 			
 			knobClicked = false;
+			sliding = false;
 			knobX = (size.x-10)*value;
 		}
 	};
