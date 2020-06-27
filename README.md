@@ -11,6 +11,8 @@
   
 ### スイッチ
 #### 角丸長方形スイッチ
+<img width="125" alt="スクリーンショット 2020-06-27 20 54 49" src="https://user-images.githubusercontent.com/10475696/85921644-7edb0e80-b8b8-11ea-8e77-a95af8a2ac5a.png">
+  
 角丸長方形のスイッチです。  
 押したらONに、もう一度押すとOFFになります。  
   
@@ -48,6 +50,8 @@ NeumorphismUI::RectSwitch(
 |argLowerShadowPosOffset|Vec2|右下の光があたった部分/影の部分の相対描画位置|{4, 4}|  
   
 ##### 使用例
+<img width="802" alt="スクリーンショット 2020-06-27 20 54 43" src="https://user-images.githubusercontent.com/10475696/85921650-8995a380-b8b8-11ea-85cc-8fd0c702cd41.png">
+  
 ```
 #include <Siv3D.hpp> // OpenSiv3D v0.4.3
 #include "NeumorphismUI.hpp"
@@ -57,7 +61,7 @@ void Main() {
 	
 	Font font24(24);
 	
-	bool rectButtonPushed = true;
+	bool rectButtonPushed = false;
 	
 	while (System::Update()) {
 		NeumorphismUI::RectSwitch(Point(100, 100), Size(100, 100), rectButtonPushed, U"Push", font24);
