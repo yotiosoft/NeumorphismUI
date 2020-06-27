@@ -1,8 +1,10 @@
 # NeumorphismUI
-<img width="805" alt="スクリーンショット 2020-06-27 23 35 45" src="https://user-images.githubusercontent.com/10475696/85924897-26177000-b8d0-11ea-8d41-8257aeabced9.png">
 
 ## 概要
-ニューモーフィズムなボタンやスライダなどをOpenSiv3D上で再現するプログラムです。
+<img width="805" alt="スクリーンショット 2020-06-27 23 35 45" src="https://user-images.githubusercontent.com/10475696/85924897-26177000-b8d0-11ea-8d41-8257aeabced9.png">
+  
+ニューモーフィズムなボタンやスライダなどをOpenSiv3D上で再現するプログラムです。  
+※サンプルは一番下にあります
 
 ## 使い方
 ```
