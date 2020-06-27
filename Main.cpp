@@ -4,44 +4,52 @@
 void Main() {
 	Scene::SetBackground(DEFAULT_BACKGROUND_COLOR);
 	
-	double d = 0.5;
+	double sliderVar = 0.5;		// スライダーの初期値
+	bool slideSwitchVar = true;	// スライドスイッチの初期値
 	int count = 0;
 	
 	Font font24(24);
 	
-	NeumorphismUI::Slider		slider(d, Vec2{400, 100}, 200, 30);
-	NeumorphismUI::Switch		switchButton(true, 400, 300, 50, 30);
+	// スライダーの宣言
+	NeumorphismUI::Slider slider(sliderVar, Vec2{400, 100}, 200, 30);
+	// スライドスイッチの宣言
+	NeumorphismUI::SlideSwitch slideSwitch(slideSwitchVar, 400, 300, 50, 30);
 	
-	bool rectButtonPushed = true;
-	bool circleButtonPushed = false;
+	bool rectSwitchPushed = true;		// 角丸長方形スイッチの初期値（ON）
+	bool circleSwitchPushed = false;	// 丸型スイッチの初期値（OFF）
 	
 	while (System::Update()) {
-		NeumorphismUI::RectSwitch(Point(100, 100), Size(100, 100), rectButtonPushed, U"Push", font24);
-		if (rectButtonPushed) {
+		// 角丸長方形スイッチ
+		NeumorphismUI::RectSwitch(Point(100, 100), Size(100, 100), rectSwitchPushed, U"Push", font24);
+		if (rectSwitchPushed) {
 			font24(U"ON").draw(250, 130, Palette::Black);
 		}
 		else {
 			font24(U"OFF").draw(250, 130, Palette::Black);
 		}
 		
-		NeumorphismUI::CircleSwitch(Point(150, 320), 50, circleButtonPushed, U"Push", font24);
-		if (circleButtonPushed) {
+		// 丸型スイッチ
+		NeumorphismUI::CircleSwitch(Point(150, 320), 50, circleSwitchPushed, U"Push", font24);
+		if (circleSwitchPushed) {
 			font24(U"ON").draw(250, 300, Palette::Black);
 		}
 		else {
 			font24(U"OFF").draw(250, 300, Palette::Black);
 		}
 		
-		d = slider.draw();
-		font24(U"{:.2f}"_fmt(d)).draw(550, 150, Palette::Black);
+		// スライダー
+		sliderVar = slider.draw();
+		font24(U"{:.2f}"_fmt(sliderVar)).draw(550, 150, Palette::Black);
 		
-		if (switchButton.draw()) {
+		// スライドスイッチ
+		if (slideSwitch.draw()) {
 			font24(U"ON").draw(550, 300, Palette::Black);
 		}
 		else {
 			font24(U"OFF").draw(550, 300, Palette::Black);
 		}
 		
+		// 角丸長方形ボタン -> カウンターとして動作
 		if (NeumorphismUI::RectButton(Point(100, 450), Size(200, 50), U"Push", font24)) {
 			count ++;
 		}

@@ -16,6 +16,7 @@
 #define DEFAULT_LIGHT_COLOR			Color(255, 255, 255)
 
 namespace NeumorphismUI {
+	// 角丸長方形スイッチ
 	void RectSwitch(int argPositionX, int argPositionY,
 					int argSizeX, int argSizeY,
 					bool& argVar,
@@ -100,7 +101,7 @@ namespace NeumorphismUI {
 		RectSwitch(argPosition.x, argPosition.y, argSize.x, argSize.y, argVar, argStr, argFont, argBackgroundColor, argDarkColor, argLightColor, argFontColor, argPushedFontColor, argRadius, argBlurSize, argShadowSize, argUpperShadowPosOffset, argLowerShadowPosOffset);
 	}
 
-
+	// 角丸長方形ボタン
 	int RectButton(int argPositionX, int argPositionY,
 					int argSizeX, int argSizeY,
 					String argStr, Font& argFont,
@@ -180,6 +181,7 @@ namespace NeumorphismUI {
 		return RectButton(argPosition.x, argPosition.y, argSize.x, argSize.y, argStr, argFont, argBackgroundColor, argDarkColor, argLightColor, argFontColor, argPushedFontColor, argRadius, argBlurSize, argShadowSize, argUpperShadowPosOffset, argLowerShadowPosOffset);
 	}
 
+	// 丸型スイッチ
 	void CircleSwitch(int argPositionX, int argPositionY,
 					  int argSize,
 					  bool& argVar,
@@ -240,6 +242,7 @@ namespace NeumorphismUI {
 		CircleSwitch(argPosition.x, argPosition.y, argSize, argVar, argStr, argFont, argBackgroundColor, argDarkColor, argLightColor, argFontColor, argPushedFontColor, argBlurSize, argShadowSize, argUpperShadowPosOffset, argLowerShadowPosOffset);
 	}
 
+	// 丸型ボタン
 	int CircleButton(int argPositionX, int argPositionY,
 					 int argSize,
 					 String argStr, Font& argFont,
@@ -298,22 +301,22 @@ namespace NeumorphismUI {
 	}
 
 	// スライドスイッチ
-	class Switch {
+	class SlideSwitch {
 	public:
-		Switch(bool argBool, int argPositionX, int argPositionY, int argSizeW, int argSizeH) {
-			init(argBool, argPositionX, argPositionY, argSizeW, argSizeH);
+		SlideSwitch(bool argVar, int argPositionX, int argPositionY, int argSizeW, int argSizeH) {
+			init(argVar, argPositionX, argPositionY, argSizeW, argSizeH);
 		}
 		
-		Switch(bool argBool, int argPositionX, int argPositionY, Vec2 argSize) {
-			init(argBool, argPositionX, argPositionY, argSize.x, argSize.y);
+		SlideSwitch(bool argVar, int argPositionX, int argPositionY, Vec2 argSize) {
+			init(argVar, argPositionX, argPositionY, argSize.x, argSize.y);
 		}
 		
-		Switch(bool argBool, Vec2 argPosition, int argSizeW, int argSizeH) {
-			init(argBool, argPosition.x, argPosition.y, argSizeW, argSizeH);
+		SlideSwitch(bool argVar, Vec2 argPosition, int argSizeW, int argSizeH) {
+			init(argVar, argPosition.x, argPosition.y, argSizeW, argSizeH);
 		}
 		
-		Switch(bool argBool, Vec2 argPosition, Vec2 argSize) {
-			init(argBool, argPosition.x, argPosition.y, argSize.x, argSize.y);
+		SlideSwitch(bool argVar, Vec2 argPosition, Vec2 argSize) {
+			init(argVar, argPosition.x, argPosition.y, argSize.x, argSize.y);
 		}
 		
 		bool draw() {
@@ -414,20 +417,20 @@ namespace NeumorphismUI {
 	// スライダー
 	class Slider {
 	public:
-		Slider(double argRet, int argPositionX, int argPositionY, int argSizeW, int argSizeH) {
-			init(argRet, argPositionX, argPositionY, argSizeW, argSizeH);
+		Slider(double argVar, int argPositionX, int argPositionY, int argSizeW, int argSizeH) {
+			init(argVar, argPositionX, argPositionY, argSizeW, argSizeH);
 		}
 		
-		Slider(double argRet, int argPositionX, int argPositionY, Vec2 argSize) {
-			init(argRet, argPositionX, argPositionY, argSize.x, argSize.y);
+		Slider(double argVar, int argPositionX, int argPositionY, Vec2 argSize) {
+			init(argVar, argPositionX, argPositionY, argSize.x, argSize.y);
 		}
 		
-		Slider(double argRet, Vec2 argPosition, int argSizeW, int argSizeH) {
-			init(argRet, argPosition.x, argPosition.y, argSizeW, argSizeH);
+		Slider(double argVar, Vec2 argPosition, int argSizeW, int argSizeH) {
+			init(argVar, argPosition.x, argPosition.y, argSizeW, argSizeH);
 		}
 		
-		Slider(double argRet, Vec2 argPosition, Vec2 argSize) {
-			init(argRet, argPosition.x, argPosition.y, argSize.x, argSize.y);
+		Slider(double argVar, Vec2 argPosition, Vec2 argSize) {
+			init(argVar, argPosition.x, argPosition.y, argSize.x, argSize.y);
 		}
 		
 		double draw() {
