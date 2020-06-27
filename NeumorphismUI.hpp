@@ -18,8 +18,8 @@
 namespace NeumorphismUI {
 	void RectSwitch(int argPositionX, int argPositionY,
 					int argSizeX, int argSizeY,
+					bool& argVar,
 					String argStr, Font& argFont,
-					bool& argSwitch,
 					Color argBackgroundColor = DEFAULT_BACKGROUND_COLOR, Color argDarkColor = DEFAULT_SHADOW_COLOR, Color argLightColor = DEFAULT_LIGHT_COLOR,
 					Color argFontColor = Palette::Gray, Color argPushedFontColor = Palette::Gray,
 					int argRadius = 10, int argBlurSize = 16, int argShadowSize = 2,
@@ -35,10 +35,10 @@ namespace NeumorphismUI {
 		}
 		bool isClicked = switchRect.leftClicked();
 		if (isClicked) {
-			argSwitch = !argSwitch;
+			argVar = !argVar;
 		}
 		
-		if (argSwitch) {
+		if (argVar) {
 			switchRect.drawShadow(argUpperShadowPosOffset, argBlurSize, argShadowSize, argDarkColor).drawShadow(argLowerShadowPosOffset, argBlurSize, argShadowSize, argLightColor).draw(argBackgroundColor);
 			mat = Mat3x2::Scale(0.9, Point(argPositionX+argSizeX/2, argPositionY+argSizeY/2));
 			
@@ -66,38 +66,38 @@ namespace NeumorphismUI {
 
 	void RectSwitch(Vec2 argPosition,
 					int argSizeX, int argSizeY,
+					bool& argVar,
 					String argStr, Font& argFont,
-					bool& argSwitch,
 					Color argBackgroundColor = DEFAULT_BACKGROUND_COLOR, Color argDarkColor = DEFAULT_SHADOW_COLOR, Color argLightColor = DEFAULT_LIGHT_COLOR,
 					Color argFontColor = Palette::Gray, Color argPushedFontColor = Palette::Gray,
 					int argRadius = 10, int argBlurSize = 16, int argShadowSize = 2,
 					Vec2 argUpperShadowPosOffset = {-4, -4}, Vec2 argLowerShadowPosOffset = {4, 4})
 	{
-		RectSwitch(argPosition.x, argPosition.y, argSizeX, argSizeY, argStr, argFont, argSwitch, argBackgroundColor, argDarkColor, argLightColor, argFontColor, argPushedFontColor, argRadius, argBlurSize, argShadowSize, argUpperShadowPosOffset, argLowerShadowPosOffset);
+		RectSwitch(argPosition.x, argPosition.y, argSizeX, argSizeY, argVar, argStr, argFont, argBackgroundColor, argDarkColor, argLightColor, argFontColor, argPushedFontColor, argRadius, argBlurSize, argShadowSize, argUpperShadowPosOffset, argLowerShadowPosOffset);
 	}
 
 	void RectSwitch(int argPositionX, int argPositionY,
 					Vec2 argSize,
+					bool& argVar,
 					String argStr, Font& argFont,
-					bool& argSwitch,
 					Color argBackgroundColor = DEFAULT_BACKGROUND_COLOR, Color argDarkColor = DEFAULT_SHADOW_COLOR, Color argLightColor = DEFAULT_LIGHT_COLOR,
 					Color argFontColor = Palette::Gray, Color argPushedFontColor = Palette::Gray,
 					int argRadius = 10, int argBlurSize = 16, int argShadowSize = 2,
 					Vec2 argUpperShadowPosOffset = {-4, -4}, Vec2 argLowerShadowPosOffset = {4, 4})
 	{
-		RectSwitch(argPositionX, argPositionY, argSize.x, argSize.y, argStr, argFont, argSwitch, argBackgroundColor, argDarkColor, argLightColor, argFontColor, argPushedFontColor, argRadius, argBlurSize, argShadowSize, argUpperShadowPosOffset, argLowerShadowPosOffset);
+		RectSwitch(argPositionX, argPositionY, argSize.x, argSize.y, argVar, argStr, argFont, argBackgroundColor, argDarkColor, argLightColor, argFontColor, argPushedFontColor, argRadius, argBlurSize, argShadowSize, argUpperShadowPosOffset, argLowerShadowPosOffset);
 	}
 
 	void RectSwitch(Vec2 argPosition,
 					Vec2 argSize,
+					bool& argVar,
 					String argStr, Font& argFont,
-					bool& argSwitch,
 					Color argBackgroundColor = DEFAULT_BACKGROUND_COLOR, Color argDarkColor = DEFAULT_SHADOW_COLOR, Color argLightColor = DEFAULT_LIGHT_COLOR,
 					Color argFontColor = Palette::Gray, Color argPushedFontColor = Palette::Gray,
 					int argRadius = 10, int argBlurSize = 16, int argShadowSize = 2,
 					Vec2 argUpperShadowPosOffset = {-4, -4}, Vec2 argLowerShadowPosOffset = {4, 4})
 	{
-		RectSwitch(argPosition.x, argPosition.y, argSize.x, argSize.y, argStr, argFont, argSwitch, argBackgroundColor, argDarkColor, argLightColor, argFontColor, argPushedFontColor, argRadius, argBlurSize, argShadowSize, argUpperShadowPosOffset, argLowerShadowPosOffset);
+		RectSwitch(argPosition.x, argPosition.y, argSize.x, argSize.y, argVar, argStr, argFont, argBackgroundColor, argDarkColor, argLightColor, argFontColor, argPushedFontColor, argRadius, argBlurSize, argShadowSize, argUpperShadowPosOffset, argLowerShadowPosOffset);
 	}
 
 
@@ -182,8 +182,8 @@ namespace NeumorphismUI {
 
 	void CircleSwitch(int argPositionX, int argPositionY,
 					  int argSize,
+					  bool& argVar,
 					  String argStr, Font& argFont,
-					  bool& argSwitch,
 					  Color argBackgroundColor = DEFAULT_BACKGROUND_COLOR, Color argDarkColor = DEFAULT_SHADOW_COLOR, Color argLightColor = DEFAULT_LIGHT_COLOR,
 					  Color argFontColor = Palette::Gray, Color argPushedFontColor = Palette::Gray,
 					  int argBlurSize = 16, int argShadowSize = 2,
@@ -199,10 +199,10 @@ namespace NeumorphismUI {
 		}
 		bool isClicked = switchCircle.leftClicked();
 		if (isClicked) {
-			argSwitch = !argSwitch;
+			argVar = !argVar;
 		}
 		
-		if (argSwitch) {
+		if (argVar) {
 			switchCircle.drawShadow(argUpperShadowPosOffset, argBlurSize, argShadowSize, argDarkColor).drawShadow(argLowerShadowPosOffset, argBlurSize, argShadowSize, argLightColor).draw(argBackgroundColor);
 			mat = Mat3x2::Scale(0.9, Point(argPositionX, argPositionY));
 			
@@ -230,14 +230,14 @@ namespace NeumorphismUI {
 
 	void CircleSwitch(Vec2 argPosition,
 					  int argSize,
+					  bool& argVar,
 					  String argStr, Font& argFont,
-					  bool& argSwitch,
 					  Color argBackgroundColor = DEFAULT_BACKGROUND_COLOR, Color argDarkColor = DEFAULT_SHADOW_COLOR, Color argLightColor = DEFAULT_LIGHT_COLOR,
 					  Color argFontColor = Palette::Gray, Color argPushedFontColor = Palette::Gray,
 					  int argBlurSize = 16, int argShadowSize = 2,
 					  Vec2 argUpperShadowPosOffset = {-4, -4}, Vec2 argLowerShadowPosOffset = {4, 4})
 	{
-		CircleSwitch(argPosition.x, argPosition.y, argSize, argStr, argFont, argSwitch, argBackgroundColor, argDarkColor, argLightColor, argFontColor, argPushedFontColor, argBlurSize, argShadowSize, argUpperShadowPosOffset, argLowerShadowPosOffset);
+		CircleSwitch(argPosition.x, argPosition.y, argSize, argVar, argStr, argFont, argBackgroundColor, argDarkColor, argLightColor, argFontColor, argPushedFontColor, argBlurSize, argShadowSize, argUpperShadowPosOffset, argLowerShadowPosOffset);
 	}
 
 	int CircleButton(int argPositionX, int argPositionY,

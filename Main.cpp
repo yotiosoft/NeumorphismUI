@@ -16,7 +16,7 @@ void Main() {
 	bool circleButtonPushed = false;
 	
 	while (System::Update()) {
-		NeumorphismUI::RectSwitch(Point(100, 100), Size(100, 100), U"Push", font24, rectButtonPushed);
+		NeumorphismUI::RectSwitch(Point(100, 100), Size(100, 100), rectButtonPushed, U"Push", font24);
 		if (rectButtonPushed) {
 			font24(U"ON").draw(250, 130, Palette::Black);
 		}
@@ -24,7 +24,7 @@ void Main() {
 			font24(U"OFF").draw(250, 130, Palette::Black);
 		}
 		
-		NeumorphismUI::CircleSwitch(Point(150, 320), 50, U"Push", font24, circleButtonPushed);
+		NeumorphismUI::CircleSwitch(Point(150, 320), 50, circleButtonPushed, U"Push", font24);
 		if (circleButtonPushed) {
 			font24(U"ON").draw(250, 300, Palette::Black);
 		}
