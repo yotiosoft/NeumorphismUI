@@ -1,8 +1,7 @@
 # NeumorphismUI
-OpenSiv3Dでニューモーフィズム！
 
 ## 概要
-ニューモーフィズムなボタンやスライダなどをOpenSiv3D上で提供するプログラムです。
+ニューモーフィズムなボタンやスライダなどをOpenSiv3D上で再現するプログラムです。
 
 ## 使い方
 ```
@@ -10,9 +9,10 @@ OpenSiv3Dでニューモーフィズム！
 ```
 でヘッダファイルをincludeしてお使いください。  
   
-### ボタン
-#### 角丸長方形ボタン
-角丸長方形のボタンです。  
+### スイッチ
+#### 角丸長方形スイッチ
+角丸長方形のスイッチです。  
+押したらONに、もう一度押すとOFFになります。  
   
 使用例：
 ```
@@ -20,16 +20,15 @@ OpenSiv3Dでニューモーフィズム！
 #include "NeumorphismUI.hpp"
 
 void Main() {
-	Scene::SetBackground(Color(224, 229, 236));
-	
-	double d = 0.5;
-	int count = 0;
+	Scene::SetBackground(DEFAULT_BACKGROUND_COLOR);
 	
 	Font font24(24);
-	NeumorphismUI::RectButton rectButton(Vec2(100, 100), U"Push", font24, false);
+	
+	bool rectButtonPushed = true;
 	
 	while (System::Update()) {
-		if (rectButton.draw(Point(100, 100))) {
+		NeumorphismUI::RectSwitch(Point(100, 100), Size(100, 100), U"Push", font24, rectButtonPushed);
+		if (rectButtonPushed) {
 			font24(U"ON").draw(250, 130, Palette::Black);
 		}
 		else {
@@ -37,40 +36,10 @@ void Main() {
 		}
 	}
 }
-```
-押すとON、もう一度押すとOFFになります。  
-draw関数は、ボタンが押されている間はtrueを返します。
-  
-  
-押したら戻るボタンを設置したい場合は、第4引数をtrueにしてください。
-```
-NeumorphismUI::RectButton rectButton(Vec2(100, 100), U"Push", font24, true);
-```
-この場合、メンバ関数leftClicked()で押されたかどうかが判定できます。  
-leftClicked()は、押しっぱなしにした場合も、ボタンがクリックされた瞬間だけtrueを返します。  
-  
-使用例：
-```
-#include <Siv3D.hpp> // OpenSiv3D v0.4.3
-#include "NeumorphismUI.hpp"
 
-void Main() {
-	Scene::SetBackground(Color(224, 229, 236));
-	
-	int count = 0;
-	
-	Font font24(24);
-	NeumorphismUI::RectButton 	countButton(Size(200, 50), U"Count", font24, true);
-	
-	while (System::Update()) {
-		countButton.draw(Point(100, 100));
-		if (countButton.leftClicked()) {
-			count ++;
-		}
-		font24(count).draw(350, 100, Palette::Black);
-	}
-}
 ```
+第５引数に指定した変数（bool型）に値が返されます。  
+ONのときtrue、OFFのときfalseです。  
 
 #### 丸型ボタン
 丸形のボタンです。  
