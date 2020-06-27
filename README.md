@@ -176,6 +176,8 @@ ONのときtrue、OFFのときfalseです。
 ボタンが押下されたときに戻り値がtrueになります。
 
 ### スライドスイッチ
+<img width="90" alt="スクリーンショット 2020-06-27 23 42 41" src="https://user-images.githubusercontent.com/10475696/85924861-efd9f080-b8cf-11ea-97c0-d2d6d4ec684a.png">
+  
 スライド式のスイッチです。  
 角丸長方形や丸型のボタン/スイッチとは異なり、オブジェクトとなっていますので、  
 使用の際には予め宣言が必要です。  
@@ -217,6 +219,8 @@ SlideSwitch(bool argVar, Vec2 argPosition, Vec2 argSize)
 draw関数で描画を行います。draw関数は現在のスイッチの値をbool型で返します。  
 
 ### スライダー
+<img width="228" alt="スクリーンショット 2020-06-27 23 42 46" src="https://user-images.githubusercontent.com/10475696/85924869-fc5e4900-b8cf-11ea-980c-82e9df22aa04.png">
+  
 0.0〜1.0の実数値を返します。  
 こちらも角丸長方形や丸型のボタン/スイッチとは異なり、オブジェクトとなっていますので、  
 使用の際には予め宣言が必要です。  
