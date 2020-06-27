@@ -75,6 +75,8 @@ void Main() {
 ONのときtrue、OFFのときfalseです。  
 
 #### 丸形スイッチ
+<img width="135" alt="スクリーンショット 2020-06-27 20 51 51" src="https://user-images.githubusercontent.com/10475696/85921578-1429d300-b8b8-11ea-9950-940d8c8fe7b3.png">
+  
 丸形のスイッチです。  
 押したらONに、もう一度押すとOFFになります。  
   
@@ -112,6 +114,8 @@ ONのときtrue、OFFのときfalseです。
   |argLowerShadowPosOffset|Vec2|右下の光があたった部分/影の部分の相対描画位置|{4, 4}|  
   
 ##### 使用例
+<img width="803" alt="スクリーンショット 2020-06-27 20 51 45" src="https://user-images.githubusercontent.com/10475696/85921577-12f8a600-b8b8-11ea-93c4-9a47e1422d03.png">  
+
 ```
 #include <Siv3D.hpp> // OpenSiv3D v0.4.3
 #include "NeumorphismUI.hpp"
