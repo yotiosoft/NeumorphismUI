@@ -2,27 +2,30 @@
 #include "NeumorphismUI.hpp"
 
 void Main() {
-	Scene::SetBackground(Color(224, 229, 236));
+	Scene::SetBackground(DEFAULT_BACKGROUND_COLOR);
 	
 	double d = 0.5;
 	int count = 0;
 	
 	Font font24(24);
-	NeumorphismUI::RectButton 	rectButton(Size(100, 100), U"Push", font24, false);
-	NeumorphismUI::CircleButton	circleButton(50, U"Push", font24, false);
+	
 	NeumorphismUI::Slider		slider(d, Vec2{400, 100}, 200, 30);
 	NeumorphismUI::Switch		switchButton(true, 400, 300, 50, 30);
-	NeumorphismUI::RectButton 	countButton(Size(200, 50), U"Count", font24, true);
+	
+	bool rectButtonPushed = true;
+	bool circleButtonPushed = false;
 	
 	while (System::Update()) {
-		if (rectButton.draw(Point(100, 100))) {
+		NeumorphismUI::RectSwitch(Point(100, 100), Size(100, 100), U"Push", font24, rectButtonPushed);
+		if (rectButtonPushed) {
 			font24(U"ON").draw(250, 130, Palette::Black);
 		}
 		else {
 			font24(U"OFF").draw(250, 130, Palette::Black);
 		}
 		
-		if (circleButton.draw(Point(150, 320))) {
+		NeumorphismUI::CircleSwitch(Point(150, 320), 50, U"Push", font24, circleButtonPushed);
+		if (circleButtonPushed) {
 			font24(U"ON").draw(250, 300, Palette::Black);
 		}
 		else {
@@ -39,8 +42,7 @@ void Main() {
 			font24(U"OFF").draw(550, 300, Palette::Black);
 		}
 		
-		countButton.draw(Point(100, 450));
-		if (countButton.leftClicked()) {
+		if (NeumorphismUI::RectButton(Point(100, 450), Size(200, 50), U"Push", font24)) {
 			count ++;
 		}
 		font24(count).draw(350, 460, Palette::Black);
