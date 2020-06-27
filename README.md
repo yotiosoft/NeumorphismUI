@@ -254,7 +254,7 @@ void Main() {
 	while (System::Update()) {
 		var = slider.draw();
 		font24(U"{:.2f}"_fmt(var)).draw(Scene::Width()/2+100, Scene::Height()/2-15, Palette::Black);
-    }
+	}
 }
 ```
 draw関数で描画を行います。draw関数は現在のスライダーの値をdouble型で返します。  
@@ -317,7 +317,7 @@ void Main() {
 			count ++;
 		}
 		font24(count).draw(350, 460, Palette::Black);
-    }
+	}
 }
 ```
 <img width="802" alt="スクリーンショット 2020-06-27 23 35 57" src="https://user-images.githubusercontent.com/10475696/85924752-22371e00-b8cf-11ea-8943-baf048554357.png">
