@@ -29,23 +29,23 @@ NeumorphismUI::RectSwitch(
 ```
 指定必須な引数は第1引数（argPosition）から第5引数（argFont）までです。  
 第6引数以降は指定することも可能ですが、未指定でも動作します。  
-|引数名|型|概要|  
-|--------|--|-----|  
+|引数名|型|概要|初期値|  
+|--------|--|-----|--------|  
 |**argPosition**|Vec2|描画する座標（左上）|  
 |**argSize**|Vec2|サイズ {横, 縦}|  
-|**argVar**bool&|戻り値を格納するBool型変数（参照渡し）|  
+|**argVar**|bool&|戻り値を格納するBool型変数（参照渡し）|  
 |**argStr**|String|スイッチに表示する文字列|  
 |**argFont**|Font&|文字列の表示に用いるフォント|  
-|argBackgroundColor|Color|背景色およびボタンの色|  
-|argDarkColor|Color|影の色|  
-|argLightColor|Color|光があたった部分の色|  
-|argFontColot|Color|フォントの色（常時）|  
-|argPushedFontColor|Color|フォントの色（スイッチ押下時）|  
-|argRadius|int|角を丸める大きさ|  
-|argBlurSize|int|影のブラーの大きさ|  
-|argShadowSize|int|影の大きさ|  
-|argUpperShadowPosOffset|Vec2|左上の光があたった部分/影の部分の相対描画位置|  
-|argLowerShadowPosOffset|Vec2|右下の光があたった部分/影の部分の相対描画位置|  
+|argBackgroundColor|Color|背景色およびボタンの色|Color(224, 229, 236)|  
+|argDarkColor|Color|影の色|Color(163, 177, 198)|  
+|argLightColor|Color|光があたった部分の色|Color(255, 255, 255)|  
+|argFontColot|Color|フォントの色（常時）|Palette::Gray|  
+|argPushedFontColor|Color|フォントの色（スイッチ押下時）|Palette::Gray|  
+|argRadius|int|角を丸める大きさ|10|  
+|argBlurSize|int|影のブラーの大きさ|16|  
+|argShadowSize|int|影の大きさ|2|  
+|argUpperShadowPosOffset|Vec2|左上の光があたった部分/影の部分の相対描画位置|{-4, -4}|  
+|argLowerShadowPosOffset|Vec2|右下の光があたった部分/影の部分の相対描画位置|{4, 4}|  
   
 ##### 使用例
 ```
@@ -87,30 +87,29 @@ ONのときtrue、OFFのときfalseです。
 	  String argStr, Font& argFont,
 	  Color argBackgroundColor = DEFAULT_BACKGROUND_COLOR, Color argDarkColor = DEFAULT_SHADOW_COLOR, Color argLightColor = DEFAULT_LIGHT_COLOR,
 	  Color argFontColor = Palette::Gray, Color argPushedFontColor = Palette::Gray,
-	  int argRadius = 10, int argBlurSize = 16, int argShadowSize = 2,
+	  int argBlurSize = 16, int argShadowSize = 2,
 	  Vec2 argUpperShadowPosOffset = {-4, -4}, Vec2 argLowerShadowPosOffset = {4, 4}
   )
   ```
   指定必須な引数は第1引数（argPosition）から第5引数（argFont）までです。  
   第6引数以降は指定することも可能ですが、未指定でも動作します。  
   円形の場合は角丸長方形と違い、座標は中心座標、サイズは円の半径となりますので注意してください。  
-  |引数名|型|概要|  
-  |--------|--|-----|  
+  |引数名|型|概要|初期値|  
+  |--------|--|-----|--------|  
   |**argPosition**|Vec2|描画する座標 **（円の中心座標）**|  
   |**argSize**|int|サイズ **（半径）**|  
-  |**argVar**bool&|戻り値を格納するBool型変数（参照渡し）|  
+  |**argVar**|bool&|戻り値を格納するBool型変数（参照渡し）|  
   |**argStr**|String|スイッチに表示する文字列|  
   |**argFont**|Font&|文字列の表示に用いるフォント|  
-  |argBackgroundColor|Color|背景色およびボタンの色|  
-  |argDarkColor|Color|影の色|  
-  |argLightColor|Color|光があたった部分の色|  
-  |argFontColot|Color|フォントの色（常時）|  
-  |argPushedFontColor|Color|フォントの色（スイッチ押下時）|  
-  |argRadius|int|角を丸める大きさ|  
-  |argBlurSize|int|影のブラーの大きさ|  
-  |argShadowSize|int|影の大きさ|  
-  |argUpperShadowPosOffset|Vec2|左上の光があたった部分/影の部分の相対描画位置|  
-  |argLowerShadowPosOffset|Vec2|右下の光があたった部分/影の部分の相対描画位置|  
+  |argBackgroundColor|Color|背景色およびボタンの色|Color(224, 229, 236)|  
+  |argDarkColor|Color|影の色|Color(163, 177, 198)|  
+  |argLightColor|Color|光があたった部分の色|Color(255, 255, 255)|  
+  |argFontColot|Color|フォントの色（常時）|Palette::Gray|  
+  |argPushedFontColor|Color|フォントの色（スイッチ押下時）|Palette::Gray|  
+  |argBlurSize|int|影のブラーの大きさ|16|  
+  |argShadowSize|int|影の大きさ|2|  
+  |argUpperShadowPosOffset|Vec2|左上の光があたった部分/影の部分の相対描画位置|{-4, -4}|  
+  |argLowerShadowPosOffset|Vec2|右下の光があたった部分/影の部分の相対描画位置|{4, 4}|  
   
 ##### 使用例
 ```
