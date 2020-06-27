@@ -8,13 +8,13 @@ void Main() {
 	int count = 0;
 	
 	Font font24(24);
-	//NeumorphismUI::RectButtonObject 	rectButton(Size(100, 100), U"Push", font24, false);
-	//NeumorphismUI::CircleButtonObject	circleButton(50, U"Push", font24, false);
+	
 	NeumorphismUI::Slider		slider(d, Vec2{400, 100}, 200, 30);
 	NeumorphismUI::Switch		switchButton(true, 400, 300, 50, 30);
-	//NeumorphismUI::RectButtonObject 	countButton(Size(200, 50), U"Count", font24, true);
+	
 	bool rectButtonPushed = true;
 	bool circleButtonPushed = false;
+	
 	while (System::Update()) {
 		NeumorphismUI::RectSwitch(Point(100, 100), Size(100, 100), U"Push", font24, rectButtonPushed);
 		if (rectButtonPushed) {
