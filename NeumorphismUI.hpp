@@ -9,7 +9,7 @@
 
 #include <stdio.h>
 #include <cmath>
-#include <Siv3D.hpp> // OpenSiv3D v0.4.3
+#include <Siv3D.hpp>
 
 #define DEFAULT_BACKGROUND_COLOR	Color(224, 229, 236)
 #define DEFAULT_SHADOW_COLOR		Color(163, 177, 198)
@@ -31,14 +31,17 @@ namespace NeumorphismUI {
 		
 		RoundRect switchRect(argPositionX, argPositionY, argSizeX, argSizeY, argRadius);
 		
+		// マウスオーバー時にマウスポインタを変更
 		if (switchRect.mouseOver()) {
 			Cursor::RequestStyle(CursorStyle::Hand);
 		}
+		// クリックされたら状態を切り替え
 		bool isClicked = switchRect.leftClicked();
 		if (isClicked) {
 			argVar = !argVar;
 		}
 		
+		// ONの時の表示
 		if (argVar) {
 			switchRect.drawShadow(argUpperShadowPosOffset, argBlurSize, argShadowSize, argDarkColor).drawShadow(argLowerShadowPosOffset, argBlurSize, argShadowSize, argLightColor).draw(argBackgroundColor);
 			mat = Mat3x2::Scale(0.9, Point(argPositionX+argSizeX/2, argPositionY+argSizeY/2));
@@ -51,6 +54,7 @@ namespace NeumorphismUI {
 				}
 			}
 		}
+		// OFFの時の表示
 		else {
 			switchRect.drawShadow(argLowerShadowPosOffset, argBlurSize, argShadowSize, argDarkColor).drawShadow(argUpperShadowPosOffset, argBlurSize, argShadowSize, argLightColor).draw(argBackgroundColor);
 			mat = Mat3x2::Identity();
@@ -115,11 +119,13 @@ namespace NeumorphismUI {
 		
 		RoundRect buttonRect(argPositionX, argPositionY, argSizeX, argSizeY, argRadius);
 		
+		// マウスオーバー時にマウスポインタを変更
 		if (buttonRect.mouseOver()) {
 			Cursor::RequestStyle(CursorStyle::Hand);
 		}
 		bool clicked = buttonRect.leftClicked();
 		
+		// 押下時の表示
 		if (buttonRect.leftPressed()) {
 			buttonRect.drawShadow(argUpperShadowPosOffset, argBlurSize, argShadowSize, argDarkColor).drawShadow(argLowerShadowPosOffset, argBlurSize, argShadowSize, argLightColor).draw(argBackgroundColor);
 			mat = Mat3x2::Scale(0.9, Point(argPositionX+argSizeX/2, argPositionY+argSizeY/2));
@@ -132,6 +138,7 @@ namespace NeumorphismUI {
 				}
 			}
 		}
+		// 押下時以外の表示
 		else {
 			buttonRect.drawShadow(argLowerShadowPosOffset, argBlurSize, argShadowSize, argDarkColor).drawShadow(argUpperShadowPosOffset, argBlurSize, argShadowSize, argLightColor).draw(argBackgroundColor);
 			mat = Mat3x2::Identity();
@@ -196,14 +203,17 @@ namespace NeumorphismUI {
 		
 		Circle switchCircle(argPositionX, argPositionY, argSize);
 		
+		// マウスオーバー時にマウスポインタを変更
 		if (switchCircle.mouseOver()) {
 			Cursor::RequestStyle(CursorStyle::Hand);
 		}
+		// クリックされたら状態を切り替え
 		bool isClicked = switchCircle.leftClicked();
 		if (isClicked) {
 			argVar = !argVar;
 		}
 		
+		// ONの時の表示
 		if (argVar) {
 			switchCircle.drawShadow(argUpperShadowPosOffset, argBlurSize, argShadowSize, argDarkColor).drawShadow(argLowerShadowPosOffset, argBlurSize, argShadowSize, argLightColor).draw(argBackgroundColor);
 			mat = Mat3x2::Scale(0.9, Point(argPositionX, argPositionY));
@@ -216,6 +226,7 @@ namespace NeumorphismUI {
 				}
 			}
 		}
+		// OFFの時の表示
 		else {
 			switchCircle.drawShadow(argLowerShadowPosOffset, argBlurSize, argShadowSize, argDarkColor).drawShadow(argUpperShadowPosOffset, argBlurSize, argShadowSize, argLightColor).draw(argBackgroundColor);
 			mat = Mat3x2::Identity();
@@ -256,11 +267,13 @@ namespace NeumorphismUI {
 		
 		Circle buttonCircle(argPositionX, argPositionY, argSize);
 		
+		// マウスオーバー時にマウスポインタを変更
 		if (buttonCircle.mouseOver()) {
 			Cursor::RequestStyle(CursorStyle::Hand);
 		}
 		bool clicked = buttonCircle.leftClicked();
 		
+		// 押下時の表示
 		if (buttonCircle.leftPressed()) {
 			buttonCircle.drawShadow(argUpperShadowPosOffset, argBlurSize, argShadowSize, argDarkColor).drawShadow(argLowerShadowPosOffset, argBlurSize, argShadowSize, argLightColor).draw(argBackgroundColor);
 			mat = Mat3x2::Scale(0.9, Point(argPositionX, argPositionY));
@@ -273,6 +286,7 @@ namespace NeumorphismUI {
 				}
 			}
 		}
+		// 押下時以外の表示
 		else {
 			buttonCircle.drawShadow(argLowerShadowPosOffset, argBlurSize, argShadowSize, argDarkColor).drawShadow(argUpperShadowPosOffset, argBlurSize, argShadowSize, argLightColor).draw(argBackgroundColor);
 			mat = Mat3x2::Identity();
@@ -323,12 +337,12 @@ namespace NeumorphismUI {
 			switchRect
 				.drawShadow(lowerShadowPosOffset, blurSize, shadowSize, darkShadow)
 				.drawShadow(upperShadowPosOffset, blurSize, shadowSize, lightShadow)
-				.draw(background);
+				.draw(background);		// スイッチの外枠
 			
 			innerSliderRect
 				.drawShadow(upperShadowPosOffset, blurSize, shadowSize, darkShadow)
 				.drawShadow(lowerShadowPosOffset, blurSize, shadowSize, lightShadow)
-				.draw(background);
+				.draw(background);		// スイッチの内枠
 			
 			knobCircle = Circle(position.x+10/2+knobX, position.y+10/2+(size.y-10)/2, (size.y-10/2)/2);
 			knobCircle.drawShadow(Vec2{0, 0}, blurSize, shadowSize, darkShadow);
@@ -338,16 +352,18 @@ namespace NeumorphismUI {
 			
 			knobCircle.draw(background);
 			
+			// マウスオーバー時にマウスポインタを変更
 			if (knobCircle.mouseOver() || barRect.mouseOver() || innerSliderRect.mouseOver()) {
 				Cursor::RequestStyle(CursorStyle::Hand);
 			}
-			
+			// 押されたら状態変更
 			if (knobCircle.leftClicked() || barRect.leftClicked() || innerSliderRect.leftClicked()) {
 				b = !b;
 				sliding = true;
 				slidingCount = 0.0;
 			}
 			
+			// スライド中の動作
 			if (sliding) {
 				slidingCount += 0.1;
 				if (slidingCount > M_PI/2) {
@@ -390,6 +406,7 @@ namespace NeumorphismUI {
 		int knobX;
 		double slidingCount;
 		
+		// コンストラクタから呼び出す
 		void init(bool argBool, int argPositionX, int argPositionY, int argSizeW, int argSizeH) {
 			upperShadowPosOffset = {-4, -4};
 			lowerShadowPosOffset = {4, 4};
@@ -437,12 +454,12 @@ namespace NeumorphismUI {
 			sliderRect
 			.drawShadow(lowerShadowPosOffset, blurSize, shadowSize, darkShadow)
 			.drawShadow(upperShadowPosOffset, blurSize, shadowSize, lightShadow)
-			.draw(background);
+			.draw(background);	// スイッチの外枠
 			
 			innerSliderRect
 			.drawShadow(upperShadowPosOffset, blurSize, shadowSize, darkShadow)
 			.drawShadow(lowerShadowPosOffset, blurSize, shadowSize, lightShadow)
-			.draw(background);
+			.draw(background);	// スイッチの内枠
 			
 			knobCircle = Circle(position.x+10/2+knobX, position.y+10/2+(size.y-10)/2, (size.y-10/2)/2);
 			knobCircle.drawShadow(Vec2{0, 0}, blurSize, shadowSize, darkShadow);
@@ -452,15 +469,18 @@ namespace NeumorphismUI {
 			
 			knobCircle.draw(background);
 			
+			// マウスオーバー時にマウスポインタを変更
 			if (knobCircle.mouseOver() || barRect.mouseOver() || innerSliderRect.mouseOver()) {
 				Cursor::RequestStyle(CursorStyle::Hand);
 			}
 			
+			// クリックされたら状態変更
 			if (knobCircle.leftPressed() || barRect.leftPressed() || innerSliderRect.leftPressed() || knobClicked) {
 				if (knobCircle.leftPressed()) {
 					knobClicked = true;
 				}
 				
+				// マウスがクリックされっぱなしのときにスライドし続ける
 				if (barRect.leftPressed() || innerSliderRect.leftPressed()) {
 					beforeX = knobX;
 					clickedX = Cursor::Pos().x-position.x+10/2;
@@ -481,6 +501,7 @@ namespace NeumorphismUI {
 				knobClicked = false;
 			}
 			
+			// スライド中の動作
 			if (sliding) {
 				slidingCount += 0.2;
 				if (slidingCount > M_PI/2) {
@@ -531,6 +552,7 @@ namespace NeumorphismUI {
 		int beforeX;
 		double slidingCount;
 		
+		// コンストラクタから呼び出す
 		void init(double argRet, int argPositionX, int argPositionY, int argSizeW, int argSizeH) {
 			upperShadowPosOffset = {-4, -4};
 			lowerShadowPosOffset = {4, 4};

@@ -6,6 +6,9 @@
 ニューモーフィズムなボタンやスライダなどをOpenSiv3D上で再現するプログラムです。  
 ※サンプルは一番下にあります
 
+## 推奨環境
+OpenSiv3D v0.4.3
+
 ## 使い方
 ```
 #include "NeumorphismUI.hpp"
