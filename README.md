@@ -1,13 +1,13 @@
 # NeumorphismUI
 
 ## 概要
-<img width="805" alt="スクリーンショット 2020-06-27 23 35 45" src="https://user-images.githubusercontent.com/10475696/85924897-26177000-b8d0-11ea-8d41-8257aeabced9.png">
+<img width="805" alt="スクリーンショット 2020-06-27 23 35 45" src="https://user-images.githubusercontent.com/10475696/142719122-7a917e86-bf8d-4156-87b2-3a56a9233650.png">
   
 ニューモーフィズムなボタンやスライダなどをOpenSiv3D上で再現するプログラムです。  
 ※サンプルは一番下にあります
 
 ## 推奨環境
-OpenSiv3D v0.4.3
+OpenSiv3D v0.6.0 以降
 
 ## 使い方
 ```
@@ -50,7 +50,7 @@ void NeumorphismUI::RectSwitch(
 |argBackgroundColor|Color|背景色およびボタンの色|Color(224, 229, 236)|  
 |argDarkColor|Color|影の色|Color(163, 177, 198)|  
 |argLightColor|Color|光があたった部分の色|Color(255, 255, 255)|  
-|argFontColot|Color|フォントの色（常時）|Palette::Gray|  
+|argFontColor|Color|フォントの色（常時）|Palette::Gray|  
 |argPushedFontColor|Color|フォントの色（スイッチ押下時）|Palette::Gray|  
 |argRadius|int|角を丸める大きさ|10|  
 |argBlurSize|int|影のブラーの大きさ|16|  
@@ -64,7 +64,7 @@ ONのときtrue、OFFのときfalseです。
 #### 角丸長方形ボタン
 <img width="125" alt="スクリーンショット 2020-06-27 20 54 49" src="https://user-images.githubusercontent.com/10475696/85921644-7edb0e80-b8b8-11ea-8e77-a95af8a2ac5a.png">
   
-角丸長方形のスイッチです。  
+角丸長方形のボタンです。  
 **押した瞬間にtrueを返します。**  
 
 ##### 書式
@@ -90,7 +90,7 @@ bool NeumorphismUI::RectSwitch(
 |argBackgroundColor|Color|背景色およびボタンの色|Color(224, 229, 236)|  
 |argDarkColor|Color|影の色|Color(163, 177, 198)|  
 |argLightColor|Color|光があたった部分の色|Color(255, 255, 255)|  
-|argFontColot|Color|フォントの色（常時）|Palette::Gray|  
+|argFontColor|Color|フォントの色（常時）|Palette::Gray|  
 |argPushedFontColor|Color|フォントの色（スイッチ押下時）|Palette::Gray|  
 |argRadius|int|角を丸める大きさ|10|  
 |argBlurSize|int|影のブラーの大きさ|16|  
@@ -132,7 +132,7 @@ bool NeumorphismUI::RectSwitch(
   |argBackgroundColor|Color|背景色およびボタンの色|Color(224, 229, 236)|  
   |argDarkColor|Color|影の色|Color(163, 177, 198)|  
   |argLightColor|Color|光があたった部分の色|Color(255, 255, 255)|  
-  |argFontColot|Color|フォントの色（常時）|Palette::Gray|  
+  |argFontColor|Color|フォントの色（常時）|Palette::Gray|  
   |argPushedFontColor|Color|フォントの色（スイッチ押下時）|Palette::Gray|  
   |argBlurSize|int|影のブラーの大きさ|16|  
   |argShadowSize|int|影の大きさ|2|  
@@ -145,8 +145,8 @@ ONのときtrue、OFFのときfalseです。
 ##### 丸型ボタン
 <img width="135" alt="スクリーンショット 2020-06-27 20 51 51" src="https://user-images.githubusercontent.com/10475696/85921578-1429d300-b8b8-11ea-9950-940d8c8fe7b3.png">
   
-丸形のスイッチです。  
-押したらONに、もう一度押すとOFFになります。  
+丸形のボタンです。  
+**押した瞬間にtrueを返します。**  
   
 ##### 書式
   ```
@@ -172,7 +172,7 @@ ONのときtrue、OFFのときfalseです。
   |argBackgroundColor|Color|背景色およびボタンの色|Color(224, 229, 236)|  
   |argDarkColor|Color|影の色|Color(163, 177, 198)|  
   |argLightColor|Color|光があたった部分の色|Color(255, 255, 255)|  
-  |argFontColot|Color|フォントの色（常時）|Palette::Gray|  
+  |argFontColor|Color|フォントの色（常時）|Palette::Gray|  
   |argPushedFontColor|Color|フォントの色（スイッチ押下時）|Palette::Gray|  
   |argBlurSize|int|影のブラーの大きさ|16|  
   |argShadowSize|int|影の大きさ|2|  
@@ -201,7 +201,7 @@ SlideSwitch(bool argVar, Vec2 argPosition, Vec2 argSize)
  ##### 描画と値の取得方法
  例：
  ```
- #include <Siv3D.hpp> // OpenSiv3D v0.4.3
+ #include <Siv3D.hpp>
  #include "NeumorphismUI.hpp"
 
  void Main() {
@@ -244,7 +244,7 @@ Slider(double argVar, Vec2 argPosition, Vec2 argSize)
 ##### 描画と値の取得方法
 例：
 ```
-#include <Siv3D.hpp> // OpenSiv3D v0.4.3
+#include <Siv3D.hpp>
 #include "NeumorphismUI.hpp"
 
 void Main() {
@@ -264,7 +264,7 @@ draw関数で描画を行います。draw関数は現在のスライダーの値
 
 ## サンプル
 ```
-#include <Siv3D.hpp> // OpenSiv3D v0.4.3
+#include <Siv3D.hpp>
 #include "NeumorphismUI.hpp"
 
 void Main() {
