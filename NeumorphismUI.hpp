@@ -1,15 +1,15 @@
-//
+﻿//
 //  	  NeumorphismUI
 //
-//  		ver.0.1.0
+//  		ver.0.1.1
+//
+//	(C) YotioSoft 2020-2021
 //
 
 #ifndef NeumorphismUI_hpp
 #define NeumorphismUI_hpp
 
-#include <stdio.h>
-#include <cmath>
-#include <Siv3D.hpp>
+#include <Siv3D.hpp>		// OpenSiv3D v0.6.0 or later
 
 #define DEFAULT_BACKGROUND_COLOR	Color(224, 229, 236)
 #define DEFAULT_SHADOW_COLOR		Color(163, 177, 198)
@@ -49,7 +49,7 @@ namespace NeumorphismUI {
 			if (!argFont.isEmpty()) {
 				{
 					// 座標変換行列を適用
-					const Transformer2D t(mat, false);
+					const Transformer2D t(mat, TransformCursor::No);
 					argFont(argStr).drawAt(argPositionX+argSizeX/2, argPositionY+argSizeY/2, argPushedFontColor);
 				}
 			}
@@ -62,7 +62,7 @@ namespace NeumorphismUI {
 			if (!argFont.isEmpty()) {
 				{
 					// 座標変換行列を適用
-					const Transformer2D t(mat, false);
+					const Transformer2D t(mat, TransformCursor::No);
 					argFont(argStr).drawAt(argPositionX+argSizeX/2, argPositionY+argSizeY/2, argFontColor);
 				}
 			}
@@ -133,7 +133,7 @@ namespace NeumorphismUI {
 			if (!argFont.isEmpty()) {
 				{
 					// 座標変換行列を適用
-					const Transformer2D t(mat, false);
+					const Transformer2D t(mat, TransformCursor::No);
 					argFont(argStr).drawAt(argPositionX+argSizeX/2, argPositionY+argSizeY/2, argPushedFontColor);
 				}
 			}
@@ -146,7 +146,7 @@ namespace NeumorphismUI {
 			if (!argFont.isEmpty()) {
 				{
 					// 座標変換行列を適用
-					const Transformer2D t(mat, false);
+					const Transformer2D t(mat, TransformCursor::No);
 					argFont(argStr).drawAt(argPositionX+argSizeX/2, argPositionY+argSizeY/2, argFontColor);
 				}
 			}
@@ -221,7 +221,7 @@ namespace NeumorphismUI {
 			if (!argFont.isEmpty()) {
 				{
 					// 座標変換行列を適用
-					const Transformer2D t(mat, false);
+					const Transformer2D t(mat, TransformCursor::No);
 					argFont(argStr).drawAt(argPositionX, argPositionY, argPushedFontColor);
 				}
 			}
@@ -234,7 +234,7 @@ namespace NeumorphismUI {
 			if (!argFont.isEmpty()) {
 				{
 					// 座標変換行列を適用
-					const Transformer2D t(mat, false);
+					const Transformer2D t(mat, TransformCursor::No);
 					argFont(argStr).drawAt(argPositionX, argPositionY, argFontColor);
 				}
 			}
@@ -281,7 +281,7 @@ namespace NeumorphismUI {
 			if (!argFont.isEmpty()) {
 				{
 					// 座標変換行列を適用
-					const Transformer2D t(mat, false);
+					const Transformer2D t(mat, TransformCursor::No);
 					argFont(argStr).drawAt(argPositionX, argPositionY, argPushedFontColor);
 				}
 			}
@@ -294,7 +294,7 @@ namespace NeumorphismUI {
 			if (!argFont.isEmpty()) {
 				{
 					// 座標変換行列を適用
-					const Transformer2D t(mat, false);
+					const Transformer2D t(mat, TransformCursor::No);
 					argFont(argStr).drawAt(argPositionX, argPositionY, argFontColor);
 				}
 			}
@@ -366,7 +366,7 @@ namespace NeumorphismUI {
 			// スライド中の動作
 			if (sliding) {
 				slidingCount += 0.1;
-				if (slidingCount > M_PI/2) {
+				if (slidingCount > Math::Pi/2) {
 					sliding = false;
 				}
 				else {
@@ -504,7 +504,7 @@ namespace NeumorphismUI {
 			// スライド中の動作
 			if (sliding) {
 				slidingCount += 0.2;
-				if (slidingCount > M_PI/2) {
+				if (slidingCount > Math::Pi/2) {
 					slidingCount = 0;
 					sliding = false;
 				}
